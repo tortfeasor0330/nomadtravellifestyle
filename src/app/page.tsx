@@ -6,20 +6,21 @@ import {
 import TourCard from '@/components/shared/TourCard';
 import DestinationCard from '@/components/shared/DestinationCard';
 import BlogCard from '@/components/shared/BlogCard';
+import ScrollReveal from '@/components/shared/ScrollReveal';
 import { tours, destinations, blogPosts } from '@/lib/data';
 
 const stats = [
   { value: '15K+', label: 'Happy Travelers' },
   { value: '120+', label: 'Tour Packages' },
   { value: '60+', label: 'Destinations' },
-  { value: '15', label: 'Years Experience' },
+  { value: '15',   label: 'Years Experience' },
 ];
 
 const features = [
-  { icon: Shield, title: 'Safe & Secure', desc: 'Your safety is our top priority. All tours are insured and vetted.' },
-  { icon: Award, title: 'Award Winning', desc: 'Recognized as the Best Travel Agency for 5 consecutive years.' },
-  { icon: Headphones, title: '24/7 Support', desc: 'Our travel experts are available around the clock to assist you.' },
-  { icon: Globe, title: 'Global Network', desc: 'Local partners in 60+ countries ensure authentic experiences.' },
+  { icon: Shield,      title: 'Safe & Secure',  desc: 'Your safety is our top priority. All tours are insured and vetted.' },
+  { icon: Award,       title: 'Award Winning',  desc: 'Recognized as the Best Travel Agency for 5 consecutive years.' },
+  { icon: Headphones,  title: '24/7 Support',   desc: 'Our travel experts are available around the clock to assist you.' },
+  { icon: Globe,       title: 'Global Network', desc: 'Local partners in 60+ countries ensure authentic experiences.' },
 ];
 
 const testimonials = [
@@ -50,35 +51,38 @@ const testimonials = [
 ];
 
 export default function HomePage() {
-  const featuredTours = tours.filter(t => t.featured).slice(0, 4);
+  const featuredTours        = tours.filter(t => t.featured).slice(0, 4);
   const featuredDestinations = destinations.slice(0, 6);
-  const recentPosts = blogPosts.slice(0, 3);
+  const recentPosts          = blogPosts.slice(0, 3);
 
   return (
     <>
       {/* ─── HERO ──────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
           style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1503220317375-aaad61436b1b?w=1920&q=85)' }}
         />
         <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F7F4EF] to-transparent" />
+
+        {/* Decorative floating orb */}
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-[#C4622D]/10 blur-3xl animate-float pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 py-28 md:py-40 w-full">
           <div className="max-w-3xl">
-            <span className="inline-block bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 text-amber-300 text-xs font-semibold px-4 py-2 rounded-full uppercase tracking-widest mb-6">
+            <span className="animate-fade-up delay-100 inline-block bg-[#C4622D]/20 backdrop-blur-sm border border-[#C4622D]/30 text-[#F0906A] text-xs font-semibold px-4 py-2 rounded-full uppercase tracking-widest mb-6">
               Discover The World With Us
             </span>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+            <h1 className="animate-fade-up delay-200 text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
               Your Next<br />
-              <span className="text-amber-400">Adventure</span><br />
+              <span className="text-[#D97048]">Adventure</span><br />
               Starts Here
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-xl leading-relaxed">
+            <p className="animate-fade-up delay-400 text-lg md:text-xl text-slate-200 mb-10 max-w-xl leading-relaxed">
               Handcrafted journeys to the world&apos;s most breathtaking destinations. Travel with expert guides, small groups, and lasting memories.
             </p>
-            <div className="flex flex-wrap gap-4 mb-16">
+            <div className="animate-fade-up delay-500 flex flex-wrap gap-4 mb-16">
               <Link href="/tours" className="btn-primary">
                 Explore Tours <ArrowRight size={18} />
               </Link>
@@ -86,11 +90,11 @@ export default function HomePage() {
                 <Play size={16} className="fill-white" /> Watch Our Story
               </button>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="animate-fade-up delay-700 grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((s) => (
                 <div key={s.label} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-amber-400">{s.value}</div>
-                  <div className="text-slate-300 text-sm mt-1">{s.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-[#D97048]">{s.value}</div>
+                  <div className="text-slate-300 text-sm mt-1 font-light">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -100,44 +104,46 @@ export default function HomePage() {
 
       {/* ─── SEARCH BAR ─────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 -mt-8 relative z-10 mb-20">
-        <div className="bg-white rounded-2xl shadow-2xl p-6 border border-slate-100">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
-              <MapPin size={18} className="text-amber-500 shrink-0" />
-              <div className="flex-1">
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Destination</p>
-                <input className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5 placeholder:text-slate-400" placeholder="Where to go?" />
+        <ScrollReveal>
+          <div className="bg-white rounded-2xl shadow-2xl p-6 border border-slate-100">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
+                <MapPin size={18} className="text-[#C4622D] shrink-0" />
+                <div className="flex-1">
+                  <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Destination</p>
+                  <input className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5 placeholder:text-slate-400" placeholder="Where to go?" />
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
-              <Calendar size={18} className="text-amber-500 shrink-0" />
-              <div className="flex-1">
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Travel Date</p>
-                <input type="date" className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5" />
+              <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
+                <Calendar size={18} className="text-[#C4622D] shrink-0" />
+                <div className="flex-1">
+                  <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Travel Date</p>
+                  <input type="date" className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5" />
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
-              <Users size={18} className="text-amber-500 shrink-0" />
-              <div className="flex-1">
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Travelers</p>
-                <select className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5">
-                  <option>1 Person</option>
-                  <option>2 People</option>
-                  <option>3-5 People</option>
-                  <option>6+ People</option>
-                </select>
+              <div className="flex items-center gap-3 border-b md:border-b-0 md:border-r border-slate-200 pb-3 md:pb-0 md:pr-4">
+                <Users size={18} className="text-[#C4622D] shrink-0" />
+                <div className="flex-1">
+                  <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Travelers</p>
+                  <select className="w-full text-sm text-slate-700 bg-transparent focus:outline-none mt-0.5 cursor-pointer">
+                    <option>1 Person</option>
+                    <option>2 People</option>
+                    <option>3-5 People</option>
+                    <option>6+ People</option>
+                  </select>
+                </div>
               </div>
+              <Link href="/tours" className="btn-primary justify-center text-sm py-3">
+                <Search size={16} /> Search Tours
+              </Link>
             </div>
-            <Link href="/tours" className="btn-primary justify-center text-sm py-3">
-              <Search size={16} /> Search Tours
-            </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── FEATURED DESTINATIONS ──────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 mb-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <span className="section-label">Top Picks</span>
             <h2 className="section-title">Popular Destinations</h2>
@@ -146,19 +152,22 @@ export default function HomePage() {
           <Link href="/destinations" className="btn-dark shrink-0 self-start md:self-auto">
             All Destinations <ArrowRight size={16} />
           </Link>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        </ScrollReveal>
+
+        <ScrollReveal stagger className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {featuredDestinations.map((dest) => (
-            <DestinationCard key={dest.slug} destination={dest} />
+            <div key={dest.slug} className="scroll-reveal">
+              <DestinationCard destination={dest} />
+            </div>
           ))}
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── WHY CHOOSE US ──────────────────────────────────────── */}
       <section className="bg-slate-50 py-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <ScrollReveal className="animate-fade-left">
               <span className="section-label">Why NomadTravel</span>
               <h2 className="section-title mb-5">We Make Every Journey Extraordinary</h2>
               <p className="text-slate-500 mb-8 leading-relaxed">
@@ -167,7 +176,7 @@ export default function HomePage() {
               <ul className="space-y-4 mb-8">
                 {['Small groups of max 16 people', 'Expert local guides in every destination', 'Sustainable & responsible tourism', '24/7 emergency support worldwide'].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-slate-700">
-                    <CheckCircle size={18} className="text-amber-500 shrink-0" />
+                    <CheckCircle size={18} className="text-[#C4622D] shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -175,25 +184,26 @@ export default function HomePage() {
               <Link href="/about" className="btn-primary">
                 Our Story <ArrowRight size={16} />
               </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
+            </ScrollReveal>
+
+            <ScrollReveal stagger className="grid grid-cols-2 gap-5">
               {features.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow border border-slate-100 group">
-                  <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500 transition-colors">
-                    <Icon size={22} className="text-amber-500 group-hover:text-white transition-colors" />
+                <div key={title} className="scroll-reveal bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-shadow border border-slate-100 group cursor-default">
+                  <div className="w-12 h-12 bg-[#C4622D]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#C4622D] transition-colors duration-300">
+                    <Icon size={22} className="text-[#C4622D] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <h3 className="font-bold text-slate-800 mb-2">{title}</h3>
                   <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
                 </div>
               ))}
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ─── FEATURED TOURS ─────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 py-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <span className="section-label">Must-Try Experiences</span>
             <h2 className="section-title">Our Featured Tours</h2>
@@ -202,49 +212,54 @@ export default function HomePage() {
           <Link href="/tours" className="btn-dark shrink-0 self-start md:self-auto">
             All Tours <ArrowRight size={16} />
           </Link>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        </ScrollReveal>
+
+        <ScrollReveal stagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredTours.map((tour) => (
-            <TourCard key={tour.slug} tour={tour} />
+            <div key={tour.slug} className="scroll-reveal">
+              <TourCard tour={tour} />
+            </div>
           ))}
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── PROMO BANNER ───────────────────────────────────────── */}
       <section
-        className="relative py-28 bg-cover bg-center"
+        className="relative py-28 bg-cover bg-center overflow-hidden"
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80)' }}
       >
-        <div className="absolute inset-0 bg-slate-900/70" />
-        <div className="relative max-w-4xl mx-auto px-4 text-center text-white">
-          <span className="section-label text-amber-400">Limited Time Offer</span>
+        <div className="absolute inset-0 bg-[#0D2818]/75" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#C4622D]/20 to-transparent" />
+        <ScrollReveal className="relative max-w-4xl mx-auto px-4 text-center text-white">
+          <span className="section-label text-[#D97048]">Limited Time Offer</span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Get 20% Off Your First Trip</h2>
           <p className="text-slate-300 text-lg mb-8 max-w-xl mx-auto">
-            New to NomadTravel? Use code <span className="text-amber-400 font-bold">NOMAD20</span> at checkout and save on any tour booked before December 31st.
+            New to NomadTravel? Use code <span className="text-[#D97048] font-bold">NOMAD20</span> at checkout and save on any tour booked before December 31st.
           </p>
           <Link href="/tours" className="btn-primary text-base">
             Claim Your Discount <ArrowRight size={18} />
           </Link>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── TESTIMONIALS ───────────────────────────────────────── */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
+          <ScrollReveal className="text-center mb-14">
             <span className="section-label">Traveler Reviews</span>
             <h2 className="section-title mb-3">What Our Guests Say</h2>
             <div className="flex items-center justify-center gap-2 mt-2">
-              {[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-amber-400 text-amber-400" />)}
+              {[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-[#C4622D] text-[#C4622D]" />)}
               <span className="text-slate-600 ml-2 font-semibold">4.9 / 5 from 2,400+ reviews</span>
             </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          </ScrollReveal>
+
+          <ScrollReveal stagger className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-white rounded-2xl p-7 shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
+              <div key={i} className="scroll-reveal bg-white rounded-2xl p-7 shadow-md border border-slate-100 hover:shadow-xl transition-shadow">
                 <div className="flex mb-4">
                   {[...Array(t.rating)].map((_, j) => (
-                    <Star key={j} size={16} className="fill-amber-400 text-amber-400" />
+                    <Star key={j} size={16} className="fill-[#C4622D] text-[#C4622D]" />
                   ))}
                 </div>
                 <p className="text-slate-600 text-sm leading-relaxed mb-6 italic">&ldquo;{t.text}&rdquo;</p>
@@ -253,18 +268,18 @@ export default function HomePage() {
                   <div>
                     <p className="font-bold text-slate-800 text-sm">{t.name}</p>
                     <p className="text-xs text-slate-500">{t.location}</p>
-                    <p className="text-xs text-amber-500 font-medium mt-0.5">{t.tour}</p>
+                    <p className="text-xs text-[#C4622D] font-medium mt-0.5">{t.tour}</p>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ─── BLOG POSTS ─────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 py-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <span className="section-label">Travel Stories</span>
             <h2 className="section-title">From Our Travel Blog</h2>
@@ -273,23 +288,28 @@ export default function HomePage() {
           <Link href="/blog" className="btn-dark shrink-0 self-start md:self-auto">
             All Articles <ArrowRight size={16} />
           </Link>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        </ScrollReveal>
+
+        <ScrollReveal stagger className="grid md:grid-cols-3 gap-6">
           {recentPosts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
+            <div key={post.slug} className="scroll-reveal">
+              <BlogCard post={post} />
+            </div>
           ))}
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── PARTNERS ───────────────────────────────────────────── */}
       <section className="py-14 border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-slate-400 text-sm uppercase tracking-widest mb-8">Trusted By Leading Travel Partners</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale">
-            {['Airbnb', 'Booking.com', 'Expedia', 'TripAdvisor', 'Viator', 'GetYourGuide'].map((partner) => (
-              <span key={partner} className="text-slate-600 font-bold text-lg">{partner}</span>
-            ))}
-          </div>
+          <ScrollReveal>
+            <p className="text-center text-slate-400 text-sm uppercase tracking-widest mb-8">Trusted By Leading Travel Partners</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-40 grayscale">
+              {['Airbnb', 'Booking.com', 'Expedia', 'TripAdvisor', 'Viator', 'GetYourGuide'].map((partner) => (
+                <span key={partner} className="text-slate-600 font-bold text-lg">{partner}</span>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </>
